@@ -1,0 +1,4 @@
+log_directory: "/tmp/logs"
+retention_days: 7
+cleanup_script_path: "/tmp/cleanup_logs.sh"
+

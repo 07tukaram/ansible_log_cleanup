@@ -1,28 +1,27 @@
 ---
 - name: Log Cleanup via Templated Script
-  hosts: log_hosts
+  hosts: local
   vars_files:
-    - vars.yml
-  become: yes
-
+    - vars/vars.yml
   tasks:
 
-    - name: Ensure the log directory exists
+    - name: Ensure log directory exists
       file:
-        path: "{{ log_cleanup_path }}"
+        path: "{{ log_directory }}"
         state: directory
         mode: '0755'
 
-    - name: Generate log cleanup script from template
+    - name: Generate cleanup script from template
       template:
-        src: "templates/cleanup_logs.sh.j2"
+        src: templates/cleanup.sh.j2
         dest: "{{ cleanup_script_path }}"
         mode: '0755'
 
-    - name: Execute the log cleanup script
-      command: "{{ cleanup_script_path }}"
+    - name: Execute the cleanup script
+      command: bash "{{ cleanup_script_path }}"
       register: cleanup_output
 
-    - name: Display script output
+    - name: Show script output
       debug:
-        var: cleanup_output.stdout_lines
+        var: cleanup_output.stdout
+

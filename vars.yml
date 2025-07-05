@@ -1,4 +1,0 @@
-log_cleanup_path: "/tmp/sample_logs"
-log_retention_days: 5
-cleanup_script_path: "/usr/local/bin/cleanup_logs.sh"
-

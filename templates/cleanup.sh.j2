@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Create log directory if not exists
+mkdir -p {{ log_directory }}
+
+# Delete .log files older than {{ retention_days }} days
+find {{ log_directory }} -type f -name "*.log" -mtime +{{ retention_days }} -exec rm -f {} \;
+
+echo "Deleted .log files older than {{ retention_days }} days from {{ log_directory }}"
+
